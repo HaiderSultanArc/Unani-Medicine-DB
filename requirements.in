@@ -1,1 +1,10 @@
 django
+django-cors-headers
+fastapi
+mysqlclient
+pydantic
+pymongo
+python-dotenv
+python-multipart
+sqlalchemy
+uvicorn

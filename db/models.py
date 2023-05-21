@@ -1,5 +1,7 @@
 from django.db import models
 
+# Create your models here.
+
 
 class DiseaseSymptomLink(models.Model):
     class Meta:
@@ -18,7 +20,7 @@ class DiseaseCauseLink(models.Model):
     id                     = models.CharField(max_length=255, primary_key=True)
     description            = models.CharField(max_length=255)
     disease_id             = models.ForeignKey("Disease", on_delete=models.CASCADE)
-    causes                 = models.ForeignKey("Cause", on_delete=models.CASCADE)
+    cause_id               = models.ForeignKey("Cause", on_delete=models.CASCADE)
 
 
 class DiseaseTreatmentPrincipleLink(models.Model):
@@ -86,14 +88,14 @@ class DiseasePreventionLink(models.Model):
     prevention_id          = models.ForeignKey("Prevention", on_delete=models.CASCADE)
 
 
-class DiseaseReferenceLink(models.Model):
-    class Meta:
-        db_table = 'cd_disease_reference_link'
+# class DiseaseReferenceLink(models.Model):
+#     class Meta:
+#         db_table = 'cd_disease_reference_link'
     
-    id                     = models.CharField(max_length=255, primary_key=True)
-    description            = models.CharField(max_length=255)
-    disease_id             = models.ForeignKey("Disease", on_delete=models.CASCADE)
-    reference_id           = models.ForeignKey("Reference", on_delete=models.CASCADE)
+#     id                     = models.CharField(max_length=255, primary_key=True)
+#     description            = models.CharField(max_length=255)
+#     disease_id             = models.ForeignKey("Disease", on_delete=models.CASCADE)
+#     reference_id           = models.ForeignKey("Reference", on_delete=models.CASCADE)
 
 
 class SymptomRegimentalTherapyLink(models.Model):
@@ -116,40 +118,6 @@ class DrugPharmacoTherapyLink(models.Model):
     pharmaco_therapy_id    = models.ForeignKey("PharmacoTherapy", on_delete=models.CASCADE)
 
 
-class Symptom(models.Model):
-    class Meta:
-        db_table = 'cd_symptoms'
-    
-    id                     = models.CharField(max_length=255, primary_key=True)
-    name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
-    name_urdu              = models.CharField(max_length=255, null=True)
-    name_urdu_roman        = models.CharField(max_length=255, null=True)
-    name_arabic            = models.CharField(max_length=255, null=True)
-    name_hindi             = models.CharField(max_length=255, null=True)
-    description            = models.CharField(max_length=255)
-    icd_code               = models.CharField(max_length=255)
-    
-    diseases               = models.ManyToManyField("Disease",              through=DiseaseSymptomLink)
-    regimental_therapies   = models.ManyToManyField("RegimentalTherapy",    through=SymptomRegimentalTherapyLink)
-
-
-class Cause(models.Model):
-    class Meta:
-        db_table = 'cd_causes'
-    
-    
-    id                     = models.CharField(max_length=255, primary_key=True)
-    name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
-    name_urdu              = models.CharField(max_length=255, null=True)
-    name_urdu_roman        = models.CharField(max_length=255, null=True)
-    name_arabic            = models.CharField(max_length=255, null=True)
-    name_hindi             = models.CharField(max_length=255, null=True)
-    description            = models.CharField(max_length=255)
-    diseases               = models.ManyToManyField("Disease", through=DiseaseCauseLink)
-
-
 class TreatmentPrinciple(models.Model):
     class Meta:
         db_table = 'cd_treatment_principles'
@@ -157,7 +125,7 @@ class TreatmentPrinciple(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
@@ -173,15 +141,15 @@ class Drug(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
     name_hindi             = models.CharField(max_length=255, null=True)
     description            = models.CharField(max_length=255)
     
-    diseases               = models.ManyToManyField("Disease",          through=DiseaseDrugLink)
-    pharmaco_therapies     = models.ManyToManyField("PharmacoTherapy",  through=DrugPharmacoTherapyLink)
+    diseases               = models.ManyToManyField("Disease", through=DiseaseDrugLink)
+    pharmaco_therapies     = models.ManyToManyField("PharmacoTherapy", through=DrugPharmacoTherapyLink)
 
 
 class RegimentalTherapy(models.Model):
@@ -191,7 +159,7 @@ class RegimentalTherapy(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
@@ -209,15 +177,15 @@ class PharmacoTherapy(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
     name_hindi             = models.CharField(max_length=255, null=True)
     description            = models.CharField(max_length=255)
     
-    diseases               = models.ManyToManyField("Disease",  through=DiseasePharmacoTherapyLink)
-    drugs                  = models.ManyToManyField("Drug",     through=DrugPharmacoTherapyLink)
+    diseases               = models.ManyToManyField("Disease", through=DiseasePharmacoTherapyLink)
+    drugs                  = models.ManyToManyField("Drug", through=DrugPharmacoTherapyLink)
 
 
 class Diet(models.Model):
@@ -227,7 +195,7 @@ class Diet(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
@@ -243,7 +211,7 @@ class Prevention(models.Model):
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
@@ -252,28 +220,62 @@ class Prevention(models.Model):
     diseases               = models.ManyToManyField("Disease", through=DiseasePreventionLink)
 
 
-class Reference(models.Model):
+# class Reference(models.Model):
+#     class Meta:
+#         db_table = 'cmn_references'
+    
+    
+#     id                     = models.CharField(max_length=255, primary_key=True)
+#     name_eng               = models.CharField(max_length=255)
+#     name_persian           = models.CharField(max_length=255, null=True)
+#     name_urdu              = models.CharField(max_length=255, null=True)
+#     name_urdu_roman        = models.CharField(max_length=255, null=True)
+#     name_arabic            = models.CharField(max_length=255, null=True)
+#     name_hindi             = models.CharField(max_length=255, null=True)
+#     description            = models.CharField(max_length=255)
+#     authors                = models.CharField(max_length=255)
+#     year                   = models.CharField(max_length=255)
+#     title                  = models.CharField(max_length=255)
+#     publisher              = models.CharField(max_length=255)
+#     edition                = models.CharField(max_length=255)
+#     volume                 = models.CharField(max_length=255)
+#     isbn                   = models.CharField(max_length=255)
+#     url                    = models.CharField(max_length=255)
+#     diseases               = models.ManyToManyField("Disease", through=DiseaseReferenceLink)
+
+
+class Symptom(models.Model):
     class Meta:
-        db_table = 'cmn_references'
+        db_table = 'cd_symptoms'
+    
+    id                     = models.CharField(max_length=255, primary_key=True)
+    name_eng               = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
+    name_urdu              = models.CharField(max_length=255, null=True)
+    name_urdu_roman        = models.CharField(max_length=255, null=True)
+    name_arabic            = models.CharField(max_length=255, null=True)
+    name_hindi             = models.CharField(max_length=255, null=True)
+    icd_code               = models.CharField(max_length=255, null=True)
+    description            = models.CharField(max_length=255)
+    
+    diseases               = models.ManyToManyField("Disease", through=DiseaseSymptomLink)
+    regimental_therapies   = models.ManyToManyField("RegimentalTherapy", through=SymptomRegimentalTherapyLink)
+
+
+class Cause(models.Model):
+    class Meta:
+        db_table = 'cd_causes'
     
     
     id                     = models.CharField(max_length=255, primary_key=True)
     name_eng               = models.CharField(max_length=255)
-    name_persian           = models.CharField(max_length=255)
+    name_persian           = models.CharField(max_length=255, null=True)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
     name_arabic            = models.CharField(max_length=255, null=True)
     name_hindi             = models.CharField(max_length=255, null=True)
     description            = models.CharField(max_length=255)
-    authors                = models.CharField(max_length=255)
-    year                   = models.CharField(max_length=255)
-    title                  = models.CharField(max_length=255)
-    publisher              = models.CharField(max_length=255)
-    edition                = models.CharField(max_length=255)
-    volume                 = models.CharField(max_length=255)
-    isbn                   = models.CharField(max_length=255)
-    url                    = models.CharField(max_length=255)
-    diseases               = models.ManyToManyField("Disease", through=DiseaseReferenceLink)
+    diseases               = models.ManyToManyField("Disease", through=DiseaseCauseLink)
 
 
 class Disease(models.Model):
@@ -282,7 +284,7 @@ class Disease(models.Model):
     
     
     id                     = models.CharField(max_length=255, primary_key=True)
-    name_eng               = models.CharField(max_length=255)
+    name_eng               = models.CharField(max_length=255, null=True)
     name_persian           = models.CharField(max_length=255)
     name_urdu              = models.CharField(max_length=255, null=True)
     name_urdu_roman        = models.CharField(max_length=255, null=True)
@@ -298,5 +300,4 @@ class Disease(models.Model):
     regimental_therapies   = models.ManyToManyField(RegimentalTherapy,  through=DiseaseRegimentalTherapyLink)
     pharmaco_therapies     = models.ManyToManyField(PharmacoTherapy,    through=DiseasePharmacoTherapyLink)
     diets                  = models.ManyToManyField(Diet,               through=DiseaseDietLink)  
-    preventions            = models.ManyToManyField(Prevention,         through=DiseasePreventionLink)
-    references             = models.ManyToManyField(Reference,          through=DiseaseReferenceLink) 
+    preventions            = models.ManyToManyField(Prevention,         through=DiseasePreventionLink)  
