@@ -448,7 +448,7 @@ def addDiseasePreventionToDB(diseaseID: str, preventionID: str):
         disease.save()
 
 
-def uploadDataToDatabase(diseasesFile: dict):
+def uploadJSONToDatabase(diseasesFile: dict):
     """
     Uploads the data to the database
     ================================
@@ -714,7 +714,7 @@ def getPreventionFromDB(preventionName: str):
     return prevention
 
 
-def getDiseaseSymptomsFromDB(diseaseName: str):
+def getSymptomsByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease symptoms from the database
     ==============================
@@ -737,7 +737,7 @@ def getDiseaseSymptomsFromDB(diseaseName: str):
     return []
 
 
-def getDiseaseCausesFromDB(diseaseName: str):
+def getCausesByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease causes from the database
     ==============================
@@ -760,7 +760,7 @@ def getDiseaseCausesFromDB(diseaseName: str):
     return []
 
 
-def getDiseaseTreatmentPrinciplesFromDB(diseaseName: str):
+def getTreatmentPrinciplesByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease treatment principles from the database
     ==============================
@@ -783,7 +783,7 @@ def getDiseaseTreatmentPrinciplesFromDB(diseaseName: str):
     return []
 
 
-def getDiseaseDrugsFromDB(diseaseName: str):
+def getDrugsByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease drugs from the database
     ==============================
@@ -806,7 +806,7 @@ def getDiseaseDrugsFromDB(diseaseName: str):
     return []
 
 
-def getDiseaseRegimentalTherapiesFromDB(diseaseName: str):
+def getRegimentalTherapiesByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease regimental therapies from the database
     ==============================
@@ -829,7 +829,7 @@ def getDiseaseRegimentalTherapiesFromDB(diseaseName: str):
     return []
 
 
-def getDiseasePharmacoTherapiesFromDB(diseaseName: str):
+def getPharmacoTherapiesByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease pharmaco therapies from the database
     ==============================
@@ -852,7 +852,7 @@ def getDiseasePharmacoTherapiesFromDB(diseaseName: str):
     return []
 
 
-def getDiseaseDietsFromDB(diseaseName: str):
+def getDietsByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease diets from the database
     ==============================
@@ -875,7 +875,7 @@ def getDiseaseDietsFromDB(diseaseName: str):
     return []
 
 
-def getDiseasePreventionsFromDB(diseaseName: str):
+def getPreventionsByDiseaseFromDB(diseaseName: str):
     """
     Gets the disease preventions from the database
     ==============================
