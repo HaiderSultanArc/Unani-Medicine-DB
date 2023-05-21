@@ -23,3 +23,8 @@ def upload_json_to_data_store(uploadFile: UploadFile):
 @app.post("/upload_utags_json_to_database")
 def upload_json_to_database(uploadFile: UploadFile):
     return handle.uploadJSONToDatabase(uploadFile)
+
+
+@app.post("/get_disease_data_from_db")
+def get_disease_data_from_db(diseaseName: str):
+    return handle.getDiseaseDataFromDB(diseaseName)

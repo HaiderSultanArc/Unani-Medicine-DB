@@ -16,7 +16,7 @@ def uploadJSONToDataStore(uploadFile: UploadFile):
             "message": "Successfully converted JSON file to MongoDB.",
             "data": None
         }
-    except TypeError as error:
+    except Exception as error:
         return {
             "success": False,
             "message": f"Failed to convert JSON file to MongoDB. {error}",
@@ -31,12 +31,29 @@ def uploadJSONToDatabase(uploadFile: UploadFile):
         
         return {
             "success": True,
-            "message": "Successfully converted JSON file to PostgreSQL.",
+            "message": "Successfully converted JSON file to MySQL.",
             "data": None
         }
     except TypeError as error:
         return {
             "success": False,
-            "message": f"Failed to convert JSON file to PostgreSQL. {error}",
+            "message": f"Failed to convert JSON file to MySQL. {error}",
+            "data": None
+        }
+
+
+def getDiseaseDataFromDB(diseaseName: str):
+    try:
+        diseaseData = db.getDiseaseDataFromDB(diseaseName)
+        
+        return {
+            "success": True,
+            "message": "Successfully fetched disease data from MySQL.",
+            "data": diseaseData
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to fetch disease data from MySQL. {error}",
             "data": None
         }
