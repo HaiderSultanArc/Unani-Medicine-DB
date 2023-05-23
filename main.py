@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
+import db.schemas as sc
 import utils.handle as handle
 
 app = FastAPI()
@@ -27,6 +28,51 @@ def get_disease_from_data_store(diseaseName: str):
 @app.post("/upload_utags_json_to_database")
 def upload_json_to_database(uploadFile: UploadFile):
     return handle.uploadJSONToDatabase(uploadFile)
+
+
+@app.post("/add_disease_to_db")
+def add_disease_to_db(diseaseData: sc.Disease):
+    return handle.addDiseaseToDB(diseaseData)
+
+
+@app.post("/add_symptom_to_db")
+def add_symptom_to_db(symptomData: sc.Symptom):
+    return handle.addSymptomToDB(symptomData)
+
+
+@app.post("/add_cause_to_db")
+def add_cause_to_db(causeData: sc.Cause):
+    return handle.addCauseToDB(causeData)
+
+
+@app.post("/add_treatment_principle_to_db")
+def add_treatment_principle_to_db(treatmentPrincipleData: sc.TreatmentPrinciple):
+    return handle.addTreatmentPrincipleToDB(treatmentPrincipleData)
+
+
+@app.post("/add_drug_to_db")
+def add_drug_to_db(drugData: sc.Drug):
+    return handle.addDrugToDB(drugData)
+
+
+@app.post("/add_regimental_therapy_to_db")
+def add_regimental_therapy_to_db(regimentalTherapyData: sc.RegimentalTherapy):
+    return handle.addRegimentalTherapyToDB(regimentalTherapyData)
+
+
+@app.post("/add_pharmacotherapy_to_db")
+def add_pharmacotherapy_to_db(pharmacotherapyData: sc.PharmacoTherapy):
+    return handle.addPharmacoTherapyToDB(pharmacotherapyData)
+
+
+@app.post("/add_diet_to_db")
+def add_diet_to_db(dietData: sc.Diet):
+    return handle.addDietToDB(dietData)
+
+
+@app.post("/add_prevention_to_db")
+def add_prevention_to_db(preventionData: sc.Prevention):
+    return handle.addPreventionToDB(preventionData)
 
 
 @app.post("/get_disease_from_db")

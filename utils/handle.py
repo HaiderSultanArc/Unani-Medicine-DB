@@ -2,6 +2,7 @@ import json
 
 from fastapi import UploadFile
 
+import db.schemas as sc
 import functions.database as db
 import functions.datastore as ds
 
@@ -61,6 +62,162 @@ def uploadJSONToDatabase(uploadFile: UploadFile):
         return {
             "success": False,
             "message": f"Failed to convert JSON file to Database. {error}",
+            "data": None
+        }
+
+
+# --------------------------------------------------
+
+
+def addDiseaseToDB(diseaseData: sc.Disease):
+    try:
+        db.addDiseaseToDB(diseaseData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added disease to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add disease to Database. {error}",
+            "data": None
+        }
+
+
+def addSymptomToDB(symptomData: sc.Symptom):
+    try:
+        db.addSymptomToDB(symptomData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added symptom to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add symptom to Database. {error}",
+            "data": None
+        }
+
+
+def addCauseToDB(causeData: sc.Cause):
+    try:
+        db.addCauseToDB(causeData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added cause to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add cause to Database. {error}",
+            "data": None
+        }
+
+
+def addTreatmentPrincipleToDB(treatmentPrincipleData: sc.TreatmentPrinciple):
+    try:
+        db.addTreatmentPrincipleToDB(treatmentPrincipleData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added treatment principle to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add treatment principle to Database. {error}",
+            "data": None
+        }
+
+
+def addDrugToDB(drugData: sc.Drug):
+    try:
+        db.addDrugToDB(drugData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added drug to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add drug to Database. {error}",
+            "data": None
+        }
+
+
+def addRegimentalTherapyToDB(regimentalTherapyData: sc.RegimentalTherapy):
+    try:
+        db.addRegimentalTherapyToDB(regimentalTherapyData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added regimental therapy to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add regimental therapy to Database. {error}",
+            "data": None
+        }
+
+
+def addPharmacoTherapyToDB(pharmacoTherapyData: sc.PharmacoTherapy):
+    try:
+        db.addPharmacoTherapyToDB(pharmacoTherapyData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added pharmaco therapy to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add pharmaco therapy to Database. {error}",
+            "data": None
+        }
+
+
+def addDietToDB(dietData: sc.Diet):
+    try:
+        db.addDietToDB(dietData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added diet to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add diet to Database. {error}",
+            "data": None
+        }
+
+
+def addPreventionToDB(preventionData: sc.Prevention):
+    try:
+        db.addPreventionToDB(preventionData)
+        
+        return {
+            "success": True,
+            "message": "Successfully added prevention to Database.",
+            "data": None
+        }
+    except Exception as error:
+        return {
+            "success": False,
+            "message": f"Failed to add prevention to Database. {error}",
             "data": None
         }
 

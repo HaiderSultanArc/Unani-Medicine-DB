@@ -16,7 +16,6 @@ def addDiseaseToDB(diseaseData: schemas.Disease):
     Adds a disease to the database
     ==============================
     Parameters:
-    
             The database session
         disease: dict
             The disease to be added to the database
@@ -44,7 +43,6 @@ def addSymptomToDB(symptomData: schemas.Symptom):
     Adds a symptom to the database
     ==============================
     Parameters:
-    
             The database session
         symptom: dict
             The symptom to be added to the database
@@ -72,7 +70,6 @@ def addCauseToDB(causeData: schemas.Cause):
     Adds a cause to the database
     ==============================
     Parameters:
-    
             The database session
         cause: dict
             The cause to be added to the database
@@ -100,7 +97,6 @@ def addTreatmentPrincipleToDB(treatmentPrincipleData: schemas.TreatmentPrinciple
     Adds a treatment principle to the database
     ==============================
     Parameters:
-    
             The database session
         treatmentPrinciple: dict
             The treatment principle to be added to the database
@@ -123,12 +119,11 @@ def addTreatmentPrincipleToDB(treatmentPrincipleData: schemas.TreatmentPrinciple
         return newTreatmentPrincipleID
 
 
-def addDrug(drugData: schemas.Drug):
+def addDrugToDB(drugData: schemas.Drug):
     """
     Adds a drug to the database
     ==============================
     Parameters:
-    
             The database session
         drug: dict
             The drug to be added to the database
@@ -151,12 +146,11 @@ def addDrug(drugData: schemas.Drug):
         return newDrugID
 
 
-def addRegimentalTherapy(regimentalTherapyData: schemas.RegimentalTherapy):
+def addRegimentalTherapyToDB(regimentalTherapyData: schemas.RegimentalTherapy):
     """
     Adds a regimental therapy to the database
     ==============================
     Parameters:
-    
             The database session
         regimentalTherapy: dict
             The regimental therapy to be added to the database
@@ -179,12 +173,11 @@ def addRegimentalTherapy(regimentalTherapyData: schemas.RegimentalTherapy):
         return newRegimentalTherapyID
 
 
-def addPharmacoTherapy(pharmacoTherapyData: schemas.PharmacoTherapy):
+def addPharmacoTherapyToDB(pharmacoTherapyData: schemas.PharmacoTherapy):
     """
     Adds a pharmaco therapy to the database
     ==============================
     Parameters:
-    
             The database session
         pharmacoTherapy: dict
             The pharmaco therapy to be added to the database
@@ -207,12 +200,11 @@ def addPharmacoTherapy(pharmacoTherapyData: schemas.PharmacoTherapy):
         return newPharmacoTherapyID
 
 
-def addDiet(dietData: schemas.Diet):
+def addDietToDB(dietData: schemas.Diet):
     """
     Adds a diet to the database
     ==============================
     Parameters:
-    
             The database session
         diet: dict
             The diet to be added to the database
@@ -235,12 +227,11 @@ def addDiet(dietData: schemas.Diet):
         return newDietID
 
 
-def addPrevention(preventionData: schemas.Prevention):
+def addPreventionToDB(preventionData: schemas.Prevention):
     """
     Adds a prevention to the database
     ==============================
     Parameters:
-    
             The database session
         prevention: dict
             The prevention to be added to the database
@@ -268,7 +259,6 @@ def addDiseaseSymptomToDB(diseaseID: str, symptomID: str):
     Adds a disease symptom to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -292,7 +282,6 @@ def addDiseaseCauseToDB(diseaseID: str, causeID: str):
     Adds a disease cause to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -315,7 +304,6 @@ def addDiseaseTreatmentPrincipleToDB(diseaseID: str, treatmentPrincipleID: str):
     Adds a disease treatment principle to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -338,7 +326,6 @@ def addDiseaseDrugToDB(diseaseID: str, drugID: str):
     Adds a disease drug to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -361,7 +348,6 @@ def addDiseaseRegimentalTherapyToDB(diseaseID: str, regimentalTherapyID: str):
     Adds a disease regimental therapy to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -384,7 +370,6 @@ def addDiseasePharmacoTherapyToDB(diseaseID: str, pharmacoTherapyID: str):
     Adds a disease pharmaco therapy to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -407,7 +392,6 @@ def addDiseaseDietToDB(diseaseID: str, dietID: str, dietType: str):
     Adds a disease diet to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -430,7 +414,6 @@ def addDiseasePreventionToDB(diseaseID: str, preventionID: str):
     Adds a disease prevention to the database
     ==============================
     Parameters:
-    
             The database session
         diseaseID: str
             The disease ID
@@ -452,8 +435,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
     """
     Uploads the data to the database
     ================================
-    Parameters:
-        file: dict
+    Parameters:    file: dict
             The file to be uploaded to the database
     ----------------
     Returns:
@@ -496,7 +478,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 name_eng=drug
             )
             
-            drugID = addDrug(drugData)
+            drugID = addDrugToDB(drugData)
             addDiseaseDrugToDB(diseaseID, drugID)
         
         for regimentalTherapy in item.get('reg_theropy'):
@@ -504,7 +486,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 name_eng=regimentalTherapy
             )
             
-            regimentalTherapyID = addRegimentalTherapy(regimentalTherapyData)
+            regimentalTherapyID = addRegimentalTherapyToDB(regimentalTherapyData)
             addDiseaseRegimentalTherapyToDB(diseaseID, regimentalTherapyID)
         
         for pharmacoTherapy in item.get('pharmacotherapy'):
@@ -512,7 +494,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 description=pharmacoTherapy
             )
             
-            pharmacoTherapyID = addPharmacoTherapy(pharmacoTherapyData)
+            pharmacoTherapyID = addPharmacoTherapyToDB(pharmacoTherapyData)
             addDiseasePharmacoTherapyToDB(diseaseID, pharmacoTherapyID)
         
         for diet in item.get('diet_recom'):
@@ -520,7 +502,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 name_eng=diet
             )
             
-            dietID = addDiet(dietData)
+            dietID = addDietToDB(dietData)
             addDiseaseDietToDB(diseaseID, dietID, dietType='recommended')
         
         for diet in item.get('diet_restrict'):
@@ -528,7 +510,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 name_eng=diet
             )
             
-            dietID = addDiet(dietData)
+            dietID = addDietToDB(dietData)
             addDiseaseDietToDB(diseaseID, dietID, dietType='restricted')
         
         for prevention in item.get('prevention'):
@@ -536,7 +518,7 @@ def uploadJSONToDatabase(diseasesFile: dict):
                 name_eng=prevention
             )
             
-            preventionID = addPrevention(preventionData)
+            preventionID = addPreventionToDB(preventionData)
             addDiseasePreventionToDB(diseaseID, preventionID)
 
 
@@ -548,7 +530,6 @@ def getDiseaseFromDB(diseaseName: str):
     Gets the disease from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -567,7 +548,6 @@ def getSymptomFromDB(symptomName: str):
     Gets the symptom from the database
     ==============================
     Parameters:
-    
             The database session
         symptomName: str
             The symptom name
@@ -586,7 +566,6 @@ def getCauseFromDB(causeName: str):
     Gets the cause from the database
     ==============================
     Parameters:
-    
             The database session
         causeName: str
             The cause name
@@ -605,7 +584,6 @@ def getTreatmentPrincipleFromDB(treatmentPrincipleName: str):
     Gets the treatment principle from the database
     ==============================
     Parameters:
-    
             The database session
         treatmentPrincipleName: str
             The treatment principle name
@@ -624,7 +602,6 @@ def getDrugFromDB(drugName: str):
     Gets the drug from the database
     ==============================
     Parameters:
-    
             The database session
         drugName: str
             The drug name
@@ -643,7 +620,6 @@ def getRegimentalTherapyFromDB(regimentalTherapyName: str):
     Gets the regimental therapy from the database
     ==============================
     Parameters:
-    
             The database session
         regimentalTherapyName: str
             The regimental therapy name
@@ -662,7 +638,6 @@ def getPharmacoTherapyFromDB(pharmacoTherapyDescription: str):
     Gets the pharmaco therapy from the database
     ==============================
     Parameters:
-    
             The database session
         pharmacoTherapyDescription: str
             The pharmaco therapy description
@@ -681,7 +656,6 @@ def getDietFromDB(dietName: str):
     Gets the diet from the database
     ==============================
     Parameters:
-    
             The database session
         dietName: str
             The diet name
@@ -700,7 +674,6 @@ def getPreventionFromDB(preventionName: str):
     Gets the prevention from the database
     ==============================
     Parameters:
-    
             The database session
         preventionName: str
             The prevention name
@@ -719,7 +692,6 @@ def getSymptomsByDiseaseFromDB(diseaseName: str):
     Gets the disease symptoms from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -742,7 +714,6 @@ def getCausesByDiseaseFromDB(diseaseName: str):
     Gets the disease causes from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -765,7 +736,6 @@ def getTreatmentPrinciplesByDiseaseFromDB(diseaseName: str):
     Gets the disease treatment principles from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -788,7 +758,6 @@ def getDrugsByDiseaseFromDB(diseaseName: str):
     Gets the disease drugs from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -811,7 +780,6 @@ def getRegimentalTherapiesByDiseaseFromDB(diseaseName: str):
     Gets the disease regimental therapies from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -834,7 +802,6 @@ def getPharmacoTherapiesByDiseaseFromDB(diseaseName: str):
     Gets the disease pharmaco therapies from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -857,7 +824,6 @@ def getDietsByDiseaseFromDB(diseaseName: str):
     Gets the disease diets from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -880,7 +846,6 @@ def getPreventionsByDiseaseFromDB(diseaseName: str):
     Gets the disease preventions from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
@@ -903,7 +868,6 @@ def getDiseaseDataFromDB(diseaseName: str):
     Gets the disease data from the database
     ==============================
     Parameters:
-    
             The database session
         diseaseName: str
             The disease name
